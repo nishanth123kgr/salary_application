@@ -1,0 +1,10 @@
+build
+dist
+.idea
+./.*
+*.docx
+*.pdf
+*.xlsx
+*.xls
+salary_reports
+__pycache__
