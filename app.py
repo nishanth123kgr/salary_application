@@ -4,7 +4,7 @@ from staff_salary_report import read_data, generate_reports
 from engineio.async_drivers import threading
 import webbrowser
 from threading import Timer
-
+import logging
 
 
 app = Flask(__name__)
@@ -12,6 +12,10 @@ socketio = SocketIO (
       app,
       async_mode="threading"
  )
+# socketio = SocketIO (
+#       app
+#  )
+logging.basicConfig(filename='app1.log', level=logging.DEBUG)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -37,5 +41,5 @@ def open_browser():
 
 if __name__ == '__main__':
     Timer(1, open_browser).start()
-    socketio.run(app, allow_unsafe_werkzeug=True, port=5000)
-    webbrowser.open_new(f'http://127.0.0.1:{socketio.server_port}')
+    socketio.run(app, allow_unsafe_werkzeug=True, port=5000, debug=True)
+    # socketio.run(app, port=5000, debug=True)

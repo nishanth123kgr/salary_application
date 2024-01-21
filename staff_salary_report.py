@@ -9,13 +9,18 @@ from docx import Document
 from docx2pdf import convert
 from PyPDF2 import PdfReader, PdfWriter
 import os
+import sys
 
 class SalaryReport:
     def __init__(self, period):
         self.period = period
+        self.base_path = sys._MEIPASS
+
+    def attach_base_path(self, path):
+        return os.path.join(self.base_path, path)
 
     def encrypt_pdf(self, pdf, password="!@#$%^&*()"):
-        output_encrypted_pdf = "salary_reports/pdf/encrypted/" + pdf.split("/")[-1][:-4] + "_encrypted.pdf"
+        output_encrypted_pdf = self.attach_base_path("salary_reports/pdf/encrypted/" + pdf.split("/")[-1][:-4] + "_encrypted.pdf")
 
         output_pdf_file = open(pdf, "rb")
         output_pdf_reader = PdfReader(output_pdf_file)
@@ -90,7 +95,7 @@ class SalaryReport:
 
 
     def gen_sal_report(self, row):
-        doc = Document("sal_template.docx")
+        doc = Document(os.path.join(self.base_path,"sal_template.docx"))
         placeholders = {
             'name': row[0].strip(),
             'des': row[20],
@@ -132,10 +137,26 @@ class SalaryReport:
                                 if text in placeholders:
                                     # print(text, placeholders[text])
                                     run.text = placeholders[text]
-        doc.save(f"salary_reports/{row[0].replace(' ', '')}{self.period}.docx")
-        pdf_loc = f"salary_reports/pdf/{row[0].replace(' ', '')}{self.period}.pdf"
-        convert(f"salary_reports/{row[0].replace(' ', '')}{self.period}.docx", pdf_loc)
-        output = self.encrypt_pdf(pdf_loc, self.generate_password(row[0], row[21]))
+        try:
+            doc.save(self.attach_base_path(f"salary_reports/{row[0].replace(' ', '')}{self.period}.docx"))
+        except Exception as e:
+            print(e)
+            print("Error at while saving docx")
+            exit(1)
+        
+        pdf_loc = self.attach_base_path(f"salary_reports/pdf/{row[0].replace(' ', '')}{self.period}.pdf")
+        try:
+            convert(self.attach_base_path(f"salary_reports/{row[0].replace(' ', '')}{self.period}.docx"), pdf_loc)
+        except Exception as e:
+            print(e)
+            print("Error at while converting docx to pdf")
+            exit(1)
+        try:
+            output = self.encrypt_pdf(pdf_loc, self.generate_password(row[0], row[21]))
+        except Exception as e:
+            print(e)
+            print("Error at while encrypting pdf")
+            exit(1)
         # self.send_mail(row[-1], '', row[0], output)
 
 

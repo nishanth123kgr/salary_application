@@ -1,0 +1,62 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:08] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:08] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:08] "GET /static/js/script.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:09] "GET /socket.io/?EIO=4&transport=polling&t=OqYbop- HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:09] "POST /socket.io/?EIO=4&transport=polling&t=OqYboqB&sid=72o7tXwmfbtmiM_WAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:09] "GET /socket.io/?EIO=4&transport=polling&t=OqYboqE&sid=72o7tXwmfbtmiM_WAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:09] "GET /socket.io/?EIO=4&transport=polling&t=OqYborx&sid=72o7tXwmfbtmiM_WAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "GET /socket.io/?EIO=4&transport=websocket&sid=72o7tXwmfbtmiM_WAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "GET /socket.io/?EIO=4&transport=polling&t=OqYbzCX HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "POST /socket.io/?EIO=4&transport=polling&t=OqYbzDI&sid=zjJsDOu5wwpwhG0OAAAC HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:09:51] "GET /socket.io/?EIO=4&transport=polling&t=OqYbzDK&sid=zjJsDOu5wwpwhG0OAAAC HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-239-690
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET /socket.io/?EIO=4&transport=polling&t=OqYcRdv HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "POST /socket.io/?EIO=4&transport=polling&t=OqYcRfQ&sid=qPIMwAG75auoTdVjAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET /socket.io/?EIO=4&transport=polling&t=OqYcRfS&sid=qPIMwAG75auoTdVjAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET /socket.io/?EIO=4&transport=polling&t=OqYcRjl HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "POST /socket.io/?EIO=4&transport=polling&t=OqYcRjy&sid=D0kmltsV-8ob-EIQAAAC HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET /socket.io/?EIO=4&transport=polling&t=OqYcRk0&sid=D0kmltsV-8ob-EIQAAAC HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:56] "GET /socket.io/?EIO=4&transport=polling&t=OqYcRld&sid=D0kmltsV-8ob-EIQAAAC HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:57] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:57] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:58] "GET /socket.io/?EIO=4&transport=polling&t=OqYcS05 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:58] "POST /socket.io/?EIO=4&transport=polling&t=OqYcS0M&sid=IyTvrBNe0P6RJ2I6AAAE HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:58] "GET /socket.io/?EIO=4&transport=polling&t=OqYcS0P&sid=IyTvrBNe0P6RJ2I6AAAE HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Jan/2024 22:11:58] "GET /socket.io/?EIO=4&transport=polling&t=OqYcS1t&sid=IyTvrBNe0P6RJ2I6AAAE HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-239-690
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-239-690
+INFO:werkzeug: * Detected change in 'd:\\Github\\salary_application\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-239-690
+INFO:werkzeug: * Detected change in 'd:\\Github\\salary_application\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
