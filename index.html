@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC Text Chat</title>
+</head>
+<body>
+    <textarea id="messageBox" rows="10" cols="50"></textarea><br>
+    <button onclick="sendMessage()">Send Message</button><br>
+    <div id="receivedMessages"></div>
+
+    <script>
+        // Set up WebRTC connection
+        const peerConnection = new RTCPeerConnection({
+            iceServers: [
+                { urls: "stun:stun.l.google.com:19302" },
+                { urls: "stun:stun1.l.google.com:19302" },
+                { urls: "stun:stun2.l.google.com:19302" },
+                { urls: "stun:stun3.l.google.com:19302" },
+                { urls: "stun:stun4.l.google.com:19302" },
+            ]
+        });
+
+        // Create a data channel
+        const dataChannel = peerConnection.createDataChannel("textChannel");
+
+        // Set up event handler for receiving messages
+        dataChannel.onmessage = function(event) {
+            const receivedMessages = document.getElementById('receivedMessages');
+            const p = document.createElement('p');
+            p.textContent = `Received: ${event.data}`;
+            receivedMessages.appendChild(p);
+        };
+
+        // Set up event handler for WebRTC data channel state changes
+        dataChannel.onopen = function() {
+            console.log('Data channel is open');
+        };
+
+        dataChannel.onclose = function() {
+            console.log('Data channel is closed');
+        };
+
+        // Function to send a message
+        function sendMessage() {
+            const messageBox = document.getElementById('messageBox');
+            const message = messageBox.value;
+            dataChannel.send(message);
+            messageBox.value = '';
+            const receivedMessages = document.getElementById('receivedMessages');
+            const p = document.createElement('p');
+            p.textContent = `Sent: ${message}`;
+            receivedMessages.appendChild(p);
+        }
+
+        // Function to create and send an offer
+        function sendOffer() {
+            peerConnection.createOffer()
+                .then(offer => peerConnection.setLocalDescription(offer))
+                .then(() => {
+                    // Send offer via WebSocket
+                    // Replace this part with your signaling mechanism
+                    console.log("Offer created: ", peerConnection.localDescription);
+                })
+                .catch(error => console.error('Error creating offer:', error));
+        }
+
+        // Start the WebRTC signaling process
+        sendOffer();
+    </script>
+</body>
+</html>

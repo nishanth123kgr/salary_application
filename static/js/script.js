@@ -20,6 +20,14 @@ document.querySelector('#upload-btn').addEventListener('click', async function (
         alertCount = 0;
         formData.append('file' + ++i, file);
     });
+    let period = document.querySelector("#period")
+    console.log(period.value)
+    if(!period.value){
+        alert("Enter Period!!");
+        return;
+    }
+    formData.append("period", `${period.value}`);
+
     if (formData.get('file1') != undefined && formData.get('file2') != undefined) {
         try {
             await fetch('/', {
@@ -29,6 +37,8 @@ document.querySelector('#upload-btn').addEventListener('click', async function (
         } catch (error) {
             console.error('Error uploading files:', error);
         }
+    } else {
+        alert("Add Files Correctly!!")
     }
 });
 

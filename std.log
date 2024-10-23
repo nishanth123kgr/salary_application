@@ -1,0 +1,28 @@
+2024-10-14 11:01:02,127  * Debugger is active!
+2024-10-14 11:01:02,144  * Debugger PIN: 849-971-857
+2024-10-14 11:01:20,148 127.0.0.1 - - [14/Oct/2024 11:01:20] "GET / HTTP/1.1" 200 -
+2024-10-14 11:01:20,326 127.0.0.1 - - [14/Oct/2024 11:01:20] "GET /static/css/main.css HTTP/1.1" 200 -
+2024-10-14 11:01:20,404 127.0.0.1 - - [14/Oct/2024 11:01:20] "GET /static/js/script.js HTTP/1.1" 200 -
+2024-10-14 11:01:21,207 127.0.0.1 - - [14/Oct/2024 11:01:21] "GET /socket.io/?EIO=4&transport=polling&t=PA9WdJk HTTP/1.1" 200 -
+2024-10-14 11:01:21,235 127.0.0.1 - - [14/Oct/2024 11:01:21] "POST /socket.io/?EIO=4&transport=polling&t=PA9WdJz&sid=TtIlAV0l1Utvt_bvAAAA HTTP/1.1" 200 -
+2024-10-14 11:01:21,236 127.0.0.1 - - [14/Oct/2024 11:01:21] "GET /socket.io/?EIO=4&transport=polling&t=PA9WdK2&sid=TtIlAV0l1Utvt_bvAAAA HTTP/1.1" 200 -
+2024-10-14 11:01:21,344 127.0.0.1 - - [14/Oct/2024 11:01:21] "GET /socket.io/?EIO=4&transport=polling&t=PA9WdLr&sid=TtIlAV0l1Utvt_bvAAAA HTTP/1.1" 200 -
+2024-10-14 11:01:21,395 127.0.0.1 - - [14/Oct/2024 11:01:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-10-14 11:03:44,353 Email successfully sent to Dr.N.Shenbaga  Vinayaga Moorthi Index: 0
+2024-10-14 11:03:51,449 Email successfully sent to Dr.J.Thirumal  Index: 1
+2024-10-14 11:03:58,735 Email successfully sent to Dr.S.Suja Priyadharsini Index: 2
+2024-10-14 11:04:03,412 Email successfully sent to Dr.M.Subramanian Index: 3
+2024-10-14 11:04:10,594 Email successfully sent to Dr.R.Mohanraj  Index: 4
+2024-10-14 11:04:20,670 Email successfully sent to Dr.S.Silas Sargunam Index: 5
+2024-10-14 11:04:25,127 Email successfully sent to Dr.K.Usha Kingsly Devi  Index: 6
+2024-10-14 11:04:34,958 Email successfully sent to Mrs.G.Devi  Index: 7
+2024-10-14 11:04:39,635 Email successfully sent to Dr.U.Arunachalam  Index: 8
+2024-10-14 11:04:48,061 Email successfully sent to Dr. C.Akila Index: 9
+2024-10-14 11:04:55,142 Email successfully sent to Dr.J.Jesu Vedha Nayahi  Index: 10
+2024-10-14 11:04:59,701 Email successfully sent to Dr. E.Golden Julie  Index: 11
+2024-10-14 11:05:08,697 Email successfully sent to Dr. J.Roselin                                       Index: 12
+2024-10-14 11:05:16,095 Email successfully sent to Mrs.Vinolia Anandan Index: 13
+2024-10-14 11:05:20,672 Email successfully sent to Dr.S.Rajakumar Index: 14
+2024-10-14 11:05:25,127 Email successfully sent to Dr.P.Arul Franco  Index: 15
+2024-10-14 11:05:34,797 Email successfully sent to Dr.M.S.Starvin Index: 16
+2024-10-14 11:05:43,292 Email successfully sent to Dr.T.Velmurugan Index: 17
