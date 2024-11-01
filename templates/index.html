@@ -98,18 +98,56 @@
         </div>
       </div>
       <div>
-        <label
-          for="period"
-          class="block my-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Period</label
-        >
-        <input
-          type="text"
-          id="period"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Month Year"
-          required
-        />
+        <form class="max-w-sm mx-auto my-2">
+          <label for="month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a month</label>
+          <select id="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose a month</option>
+          </select>
+        
+          <label for="year" class="block mt-4 mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a year</label>
+          <select id="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose a year</option>
+          </select>
+        </form>
+        
+        <script>
+          // Populate the month dropdown with full names
+          const monthSelect = document.getElementById('month');
+          const months = [
+            { name: "January", value: "January" },
+            { name: "February", value: "February" },
+            { name: "March", value: "March" },
+            { name: "April", value: "April" },
+            { name: "May", value: "May" },
+            { name: "June", value: "June" },
+            { name: "July", value: "July" },
+            { name: "August", value: "August" },
+            { name: "September", value: "September" },
+            { name: "October", value: "October" },
+            { name: "November", value: "November" },
+            { name: "December", value: "December" }
+          ];
+        
+          months.forEach(month => {
+            const option = document.createElement('option');
+            option.value = month.value;
+            option.textContent = month.name;
+            monthSelect.appendChild(option);
+          });
+        
+          // Populate the year dropdown up to the current year
+          const yearSelect = document.getElementById('year');
+          const currentYear = new Date().getFullYear();
+          const startYear = 2000; // Adjust this to your desired starting year
+        
+          for (let year = currentYear; year >= startYear; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+          }
+        </script>
+        
       </div>
       <button
         type="button"
@@ -122,7 +160,8 @@
         <thead>
           <tr>
             <th>Staff Name</th>
-            <th>Report Status</th>
+            <th>Report PDF</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>

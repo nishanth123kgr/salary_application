@@ -7,10 +7,15 @@ from email import encoders
 import pandas as pd
 from num2words import num2words
 from docx import Document
-from docx2pdf import convert
+# from docx2pdf import convert
 from PyPDF2 import PdfReader, PdfWriter
 import os
 import logging 
+import concurrent.futures
+import subprocess
+
+
+
 
 #now we will Create and configure logger 
 logging.basicConfig(filename="std.log", 
@@ -30,6 +35,15 @@ class SalaryReport:
         self.base = 'C:/Salary_Application/salary_reports/'
         if not os.path.exists(self.base + 'pdf/encrypted'):
             os.makedirs(self.base + 'pdf/encrypted')
+            
+    def convert(self, docx_path, pdf_loc):
+        if not os.path.exists(docx_path):
+            raise FileNotFoundError(f"{docx_path} does not exist")
+        
+        # print(docx_path, pdf_loc)
+        subprocess.run(['soffice', '--headless', '--convert-to', 'pdf', docx_path, '--outdir', pdf_loc], check=True)
+        
+        print(f"Converted {docx_path} to PDF @ {pdf_loc}")
 
     def encrypt_pdf(self, pdf, password="!@#$%^&*()"):
         output_encrypted_pdf = self.base + "pdf/encrypted/" + pdf.split("/")[-1][:-4] + "_encrypted.pdf"
@@ -62,7 +76,7 @@ class SalaryReport:
         # SMTP server configuration
         smtp_server = 'smtp.gmail.com'
         smtp_port = 587
-        email_password = 'iprzeridukqaklyz'
+        email_password = 'ydcznicxgwjraeni' 
 
         # Create the email message
         message = MIMEMultipart()
@@ -105,8 +119,14 @@ class SalaryReport:
         password = f"{self.convert_name(name)[:2]}{doj.strip().replace('.', '')[:4]}"
         print(password, name)
         return password
+    
+    
+    
+        
+    
 
-    def gen_sal_report(self, row):
+
+    def gen_sal_report(self, row, index, socketio=None):
         # base_path = sys._MEIPASS
         base_path = os.getcwd()
         template_path = os.path.join(base_path, 'sal_template.docx')
@@ -153,12 +173,17 @@ class SalaryReport:
                                 if text in placeholders:
                                     # print(text, placeholders[text])
                                     run.text = placeholders[text]
-        doc.save(f"{self.base}{row[0].replace(' ', '')}{self.period}.docx")
-        pdf_loc = f"{self.base}pdf/{row[0].replace(' ', '')}{self.period}.pdf"
-        convert(f"{self.base}{row[0].replace(' ', '')}{self.period}.docx", pdf_loc)
+        self.period = self.period.replace(' ', '-')
+        file_name = f"{row[0].replace(' ', '')}{self.period}_{row[18]}" 
+        doc.save(f"{self.base}{file_name}.docx")
+        pdf_loc = f"{self.base}pdf/{file_name}.pdf"
+        self.convert(f"{self.base}{file_name}.docx", f'{self.base}pdf/')
         output = self.encrypt_pdf(pdf_loc, self.generate_password(row[0], row[21]))
+        socketio.emit('report-ready', index)
         # self.send_mail(row[-2], '', row[0], output)
-        # self.send_mail('nishanth123kgr@gmail.com', '', row[0], output)
+        
+        self.send_mail('nishanth123kgr@gmail.com', '', row[0], output)
+        socketio.emit('mail-sent', index)
 
 
 
@@ -206,20 +231,82 @@ def generate_reports(data, report, socketio=None):
         print(row)
         
         try:
-            report.gen_sal_report(row)
+            report.gen_sal_report(row, index, socketio)
             logger.info('Email successfully sent to '+ row[0]+ ' Index: '+str(index)) 
-            socketio.emit('report-ready', index)
+            
             # exit()
         except Exception as e:
-            print(e)
+            logger.error(f"An exception occurred for index {index}: {e}")
             print("Error at index", index)
-            exit(1)
 
+
+
+# def generate_report_for_row(row, index, report, socketio):
+#     try:
+#         row = row.astype(str).to_list()
+#         row.append(row.pop(16))
+#         report.gen_sal_report(row, index, socketio)
+#         print("Created PDF", row[0])
+#         logger.info(f'Email successfully sent to {row[0]} Index: {index}')
+#     except Exception as e:
+#         logger.error(f"Error at index {index}: {e}")
+#         return False
+#     return True
+
+# def generate_reports(data, report, socketio=None, max_workers=4):
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+#         # Prepare arguments for each row
+#         futures = [
+#             executor.submit(generate_report_for_row, row, index, report, socketio)
+#             for index, row in data.iterrows()
+#         ]
+        
+#         for future in concurrent.futures.as_completed(futures):
+#             if not future.result():
+#                 logger.warning("A report generation task encountered an error.")
+
+# def generate_report_for_row(row, index, report, socketio):
+#     try:
+#         # Convert the row to a list of strings and rearrange as needed
+#         row = row.astype(str).to_list()
+#         row.append(row.pop(16))  # Move the 17th element to the end
+        
+#         # Generate the salary report
+#         report.gen_sal_report(row, index, socketio)
+#         logger.info(f'Email successfully sent to {row[0]} Index: {index}')
+        
+#     except Exception as e:
+#         logger.error(f"Error at index {index}: {e}")
+#         return False
+#     return True
+
+# def generate_reports(data, report, socketio=None, max_workers=4):
+#     # Ensure that data is a DataFrame
+#     if not isinstance(data, pd.DataFrame):
+#         logger.error("Data is not a pandas DataFrame.")
+#         return
+    
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+#         # Prepare futures for each row
+#         futures = {
+#             executor.submit(generate_report_for_row, row, index, report, socketio): index
+#             for index, row in data.iterrows()
+#         }
+
+#         for future in concurrent.futures.as_completed(futures):
+#             index = futures[future]
+#             try:
+#                 if not future.result():
+#                     logger.warning(f"Report generation failed for index {index}.")
+#             except Exception as e:
+#                 
 
 if __name__ == '__main__':
     salary = 'Salary for the month August  2024 (Scale) - General Fund (Scale).xls'
     staff = 'Teaching Staff Salary -20231.xlsx'
     data, report = read_data(salary, staff, "August 2024")
+    report.convert_to_pdf()
+    exit(1)
     print(data)
     # data=pd.DataFrame(data.iloc[21, :]).T
     # exit()
@@ -233,9 +320,9 @@ if __name__ == '__main__':
         try:
             report.gen_sal_report(row)
             logger.info('Email successfully sent to '+ row[0]+ ' Index: '+str(index)) 
-            # exit()
+            exit()
         except Exception as e:
             print(e)
             print("Error at index", index)
-            exit(1)
+            logger.error(f"Error at index {index} for {row[0]}: {e}", exc_info=True)
 
